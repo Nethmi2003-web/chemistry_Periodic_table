@@ -1,0 +1,53 @@
+import { Routes, Route } from 'react-router-dom'
+import { useAuth } from './contexts/AuthContext'
+import ProtectedRoute from './components/layout/ProtectedRoute'
+import NavBar from './components/layout/NavBar'
+
+// Pages
+import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import Login from './pages/Auth/Login'
+import Register from './pages/Auth/Register'
+
+function App() {
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <NavBar />
+      <main className="container mx-auto px-4 py-8">
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          
+          {/* Protected routes */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          
+          {/* Catch all route */}
+          <Route path="*" element={
+            <div className="text-center py-12">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
+              <p className="text-gray-600">Page not found</p>
+            </div>
+          } />
+        </Routes>
+      </main>
+    </div>
+  )
+}
+
+export default App
