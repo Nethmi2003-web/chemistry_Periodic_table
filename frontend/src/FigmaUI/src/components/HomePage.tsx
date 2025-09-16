@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useAuth } from '../contexts/AuthContext'
-import Button from '../components/ui/Button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card'
-import { Atom, TestTube, Calculator, BookOpen, Star, Trophy, BeakerIcon, FlaskConical } from 'lucide-react'
+import { motion } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Atom, BeakerIcon, FlaskConical } from 'lucide-react';
 
-const Home = () => {
-  const { user } = useAuth()
+export function HomePage() {
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -24,11 +23,11 @@ const Home = () => {
           <Atom className="w-full h-full" />
         </motion.div>
         
-        <h1 className="mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent text-5xl font-bold">
+        <h1 className="mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
           Interactive Periodic Table
         </h1>
         
-        <p className="max-w-2xl mx-auto text-gray-600 text-lg">
+        <p className="max-w-2xl mx-auto text-muted-foreground">
           Explore the fascinating world of chemistry with our interactive periodic table. 
           Discover the properties, history, and relationships between all 118 elements.
         </p>
@@ -81,40 +80,15 @@ const Home = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
       >
-        <Link to="/periodic-table">
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 text-white px-8 py-4 text-lg"
-          >
-            Explore Periodic Table
-          </Button>
-        </Link>
-        
-        {user ? (
-          <Link to="/dashboard">
-            <Button size="lg" variant="outline" className="px-8 py-4 text-lg">
-              Go to Dashboard
-            </Button>
-          </Link>
-        ) : (
-          <>
-            <Link to="/register">
-              <Button size="lg" variant="outline" className="px-8 py-4 text-lg">
-                Get Started
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button size="lg" variant="ghost" className="px-8 py-4 text-lg">
-                Sign In
-              </Button>
-            </Link>
-          </>
-        )}
+        <Button
+          onClick={() => navigate('/periodic-table')}
+          size="lg"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+        >
+          Explore Periodic Table
+        </Button>
       </motion.div>
     </div>
-  )
+  );
 }
-
-export default Home

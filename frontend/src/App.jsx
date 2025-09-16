@@ -6,6 +6,7 @@ import NavBar from './components/layout/NavBar'
 // Pages
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
+import PeriodicTable from './pages/PeriodicTable'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/periodic-table" element={<PeriodicTable />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           

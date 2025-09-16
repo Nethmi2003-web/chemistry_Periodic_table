@@ -1,5 +1,11 @@
 import { useAuth } from '../contexts/AuthContext'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card'
+import { Badge } from '../components/ui/Badge'
+import { elements, elementCategories } from '../data/elements'
+import { Atom, BookOpen, Trophy, Clock, TrendingUp, Users } from 'lucide-react'
 
 const Dashboard = () => {
   const { user, logout } = useAuth()
@@ -12,24 +18,41 @@ const Dashboard = () => {
     }
   }
 
+  // Calculate some stats from elements data
+  const totalElements = elements.length;
+  const categoriesCount = Object.keys(elementCategories).length;
+  const studiedElements = 0; // This would come from user data in a real app
+  const favoriteElements = 0; // This would come from user data in a real app
+
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto space-y-8">
       {/* Welcome Section */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white"
+      >
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome back, {user?.name}!
+            <h1 className="text-4xl font-bold mb-2">
+              Welcome back, {user?.name}! 👋
             </h1>
-            <p className="text-gray-600">
-              Explore the periodic table and continue your chemistry journey.
+            <p className="text-blue-100 text-lg">
+              Ready to explore the fascinating world of chemistry? Let's dive into the periodic table!
             </p>
           </div>
-          <Button onClick={handleLogout} variant="outline">
-            Logout
-          </Button>
+          <div className="flex gap-3">
+            <Link to="/periodic-table">
+              <Button className="bg-white text-blue-600 hover:bg-blue-50">
+                Explore Table
+              </Button>
+            </Link>
+            <Button onClick={handleLogout} variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+              Logout
+            </Button>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Quick Stats */}
       <div className="grid md:grid-cols-4 gap-6 mb-8">
