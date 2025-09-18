@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import ProtectedRoute from './components/layout/ProtectedRoute'
 import NavBar from './components/layout/NavBar'
@@ -12,6 +12,11 @@ import Register from './pages/Auth/Register'
 
 function App() {
   const { user, loading } = useAuth()
+  const location = useLocation()
+  
+  // Pages that don't need the main layout (NavBar + container)
+  const authPages = ['/login', '/register']
+  const isAuthPage = authPages.includes(location.pathname)
 
   if (loading) {
     return (
@@ -21,6 +26,17 @@ function App() {
     )
   }
 
+  // Auth pages get their own full layout
+  if (isAuthPage) {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    )
+  }
+
+  // All other pages get the standard layout
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
@@ -29,8 +45,6 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/periodic-table" element={<PeriodicTable />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           
           {/* Protected routes */}
           <Route path="/dashboard" element={
