@@ -1,70 +1,47 @@
-import { motion } from 'motion/react';
-import { Element, elementCategories } from '../data/elements';
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
+import { ElementData, categoryColors } from "../data/elements";
 
 interface ElementCardProps {
-  element: Element;
-  onClick?: (element: Element) => void;
-  index: number;
+  element: ElementData;
+  onClick: () => void;
 }
 
-export function ElementCard({ element, onClick, index }: ElementCardProps) {
-  const category = elementCategories[element.category as keyof typeof elementCategories];
+export function ElementCard({ element, onClick }: ElementCardProps) {
+  const categoryColor = categoryColors[element.category as keyof typeof categoryColors] || "bg-gray-500";
   
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ 
-        duration: 0.3, 
-        delay: index * 0.02,
-        ease: "easeOut"
-      }}
-      whileHover={{ 
-        scale: 1.05, 
-        boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-        transition: { duration: 0.2 }
-      }}
-      whileTap={{ scale: 0.95 }}
+    <div
+      className={`
+        ${categoryColor} 
+        cursor-pointer 
+        rounded-xl 
+        p-4 
+        flex 
+        flex-col 
+        justify-center 
+        items-center 
+        transition-all 
+        duration-300 
+        hover:scale-105 
+        hover:shadow-xl 
+        hover:shadow-black/20
+        text-white
+        min-h-[120px]
+        group
+      `}
+      onClick={onClick}
     >
-      <Card 
-        className="relative cursor-pointer border-2 transition-all duration-300 hover:border-opacity-80 min-h-[120px] flex flex-col justify-between p-3"
-        style={{ 
-          backgroundColor: category?.color + '20',
-          borderColor: category?.color
-        }}
-        onClick={() => onClick?.(element)}
-      >
-        <div className="flex justify-between items-start mb-2">
-          <span className="text-xs font-medium text-muted-foreground">
-            {element.number}
-          </span>
-          <Badge 
-            variant="secondary" 
-            className="text-xs px-1 py-0"
-            style={{ backgroundColor: category?.color + '40' }}
-          >
-            {element.phase.charAt(0).toUpperCase()}
-          </Badge>
-        </div>
-        
-        <div className="text-center flex-1 flex flex-col justify-center">
-          <div 
-            className="text-2xl mb-1"
-            style={{ color: category?.color }}
-          >
-            {element.symbol}
-          </div>
-          <div className="text-xs text-muted-foreground leading-tight">
-            {element.name}
-          </div>
-        </div>
-        
-        <div className="text-xs text-center text-muted-foreground mt-2">
-          {element.atomicMass.toFixed(element.atomicMass % 1 === 0 ? 0 : 2)}
-        </div>
-      </Card>
-    </motion.div>
+      <div className="text-sm opacity-80 mb-1">
+        {element.atomicNumber}
+      </div>
+      <div className="text-3xl font-bold mb-2 group-hover:scale-110 transition-transform">
+        {element.symbol}
+      </div>
+      <div className="text-sm text-center leading-tight opacity-90">
+        {element.name}
+      </div>
+      <div className="text-xs opacity-70 mt-1 capitalize">
+        {element.category.replace('-', ' ')}
+      </div>
+    </div>
   );
 }

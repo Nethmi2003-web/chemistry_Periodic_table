@@ -1,78 +1,289 @@
-export interface Element {
-  number: number;
+export interface ElementData {
+  atomicNumber: number;
   symbol: string;
   name: string;
   atomicMass: number;
   category: string;
-  period: number;
-  group: number;
   electronConfiguration: string;
-  phase: string;
+  description: string;
+  uses: string;
+  discoveredBy: string;
+  yearDiscovered: string;
+  gridPosition: { row: number; col: number };
 }
 
-export const elementCategories = {
-  'alkali-metal': { name: 'Alkali Metals', color: '#FF6B6B' },
-  'alkaline-earth-metal': { name: 'Alkaline Earth Metals', color: '#4ECDC4' },
-  'transition-metal': { name: 'Transition Metals', color: '#45B7D1' },
-  'post-transition-metal': { name: 'Post-Transition Metals', color: '#96CEB4' },
-  'metalloid': { name: 'Metalloids', color: '#FCEA2B' },
-  'nonmetal': { name: 'Nonmetals', color: '#FF9FF3' },
-  'halogen': { name: 'Halogens', color: '#54A0FF' },
-  'noble-gas': { name: 'Noble Gases', color: '#5F27CD' },
-  'lanthanide': { name: 'Lanthanides', color: '#FFA726' },
-  'actinide': { name: 'Actinides', color: '#EF5350' },
-};
-
-export const elements: Element[] = [
-  { number: 1, symbol: 'H', name: 'Hydrogen', atomicMass: 1.008, category: 'nonmetal', period: 1, group: 1, electronConfiguration: '1s¹', phase: 'gas' },
-  { number: 2, symbol: 'He', name: 'Helium', atomicMass: 4.003, category: 'noble-gas', period: 1, group: 18, electronConfiguration: '1s²', phase: 'gas' },
-  { number: 3, symbol: 'Li', name: 'Lithium', atomicMass: 6.94, category: 'alkali-metal', period: 2, group: 1, electronConfiguration: '[He] 2s¹', phase: 'solid' },
-  { number: 4, symbol: 'Be', name: 'Beryllium', atomicMass: 9.012, category: 'alkaline-earth-metal', period: 2, group: 2, electronConfiguration: '[He] 2s²', phase: 'solid' },
-  { number: 5, symbol: 'B', name: 'Boron', atomicMass: 10.81, category: 'metalloid', period: 2, group: 13, electronConfiguration: '[He] 2s² 2p¹', phase: 'solid' },
-  { number: 6, symbol: 'C', name: 'Carbon', atomicMass: 12.01, category: 'nonmetal', period: 2, group: 14, electronConfiguration: '[He] 2s² 2p²', phase: 'solid' },
-  { number: 7, symbol: 'N', name: 'Nitrogen', atomicMass: 14.01, category: 'nonmetal', period: 2, group: 15, electronConfiguration: '[He] 2s² 2p³', phase: 'gas' },
-  { number: 8, symbol: 'O', name: 'Oxygen', atomicMass: 16.00, category: 'nonmetal', period: 2, group: 16, electronConfiguration: '[He] 2s² 2p⁴', phase: 'gas' },
-  { number: 9, symbol: 'F', name: 'Fluorine', atomicMass: 19.00, category: 'halogen', period: 2, group: 17, electronConfiguration: '[He] 2s² 2p⁵', phase: 'gas' },
-  { number: 10, symbol: 'Ne', name: 'Neon', atomicMass: 20.18, category: 'noble-gas', period: 2, group: 18, electronConfiguration: '[He] 2s² 2p⁶', phase: 'gas' },
-  { number: 11, symbol: 'Na', name: 'Sodium', atomicMass: 22.99, category: 'alkali-metal', period: 3, group: 1, electronConfiguration: '[Ne] 3s¹', phase: 'solid' },
-  { number: 12, symbol: 'Mg', name: 'Magnesium', atomicMass: 24.31, category: 'alkaline-earth-metal', period: 3, group: 2, electronConfiguration: '[Ne] 3s²', phase: 'solid' },
-  { number: 13, symbol: 'Al', name: 'Aluminum', atomicMass: 26.98, category: 'post-transition-metal', period: 3, group: 13, electronConfiguration: '[Ne] 3s² 3p¹', phase: 'solid' },
-  { number: 14, symbol: 'Si', name: 'Silicon', atomicMass: 28.09, category: 'metalloid', period: 3, group: 14, electronConfiguration: '[Ne] 3s² 3p²', phase: 'solid' },
-  { number: 15, symbol: 'P', name: 'Phosphorus', atomicMass: 30.97, category: 'nonmetal', period: 3, group: 15, electronConfiguration: '[Ne] 3s² 3p³', phase: 'solid' },
-  { number: 16, symbol: 'S', name: 'Sulfur', atomicMass: 32.07, category: 'nonmetal', period: 3, group: 16, electronConfiguration: '[Ne] 3s² 3p⁴', phase: 'solid' },
-  { number: 17, symbol: 'Cl', name: 'Chlorine', atomicMass: 35.45, category: 'halogen', period: 3, group: 17, electronConfiguration: '[Ne] 3s² 3p⁵', phase: 'gas' },
-  { number: 18, symbol: 'Ar', name: 'Argon', atomicMass: 39.95, category: 'noble-gas', period: 3, group: 18, electronConfiguration: '[Ne] 3s² 3p⁶', phase: 'gas' },
-  { number: 19, symbol: 'K', name: 'Potassium', atomicMass: 39.10, category: 'alkali-metal', period: 4, group: 1, electronConfiguration: '[Ar] 4s¹', phase: 'solid' },
-  { number: 20, symbol: 'Ca', name: 'Calcium', atomicMass: 40.08, category: 'alkaline-earth-metal', period: 4, group: 2, electronConfiguration: '[Ar] 4s²', phase: 'solid' },
-  { number: 21, symbol: 'Sc', name: 'Scandium', atomicMass: 44.96, category: 'transition-metal', period: 4, group: 3, electronConfiguration: '[Ar] 3d¹ 4s²', phase: 'solid' },
-  { number: 22, symbol: 'Ti', name: 'Titanium', atomicMass: 47.87, category: 'transition-metal', period: 4, group: 4, electronConfiguration: '[Ar] 3d² 4s²', phase: 'solid' },
-  { number: 23, symbol: 'V', name: 'Vanadium', atomicMass: 50.94, category: 'transition-metal', period: 4, group: 5, electronConfiguration: '[Ar] 3d³ 4s²', phase: 'solid' },
-  { number: 24, symbol: 'Cr', name: 'Chromium', atomicMass: 51.99, category: 'transition-metal', period: 4, group: 6, electronConfiguration: '[Ar] 3d⁵ 4s¹', phase: 'solid' },
-  { number: 25, symbol: 'Mn', name: 'Manganese', atomicMass: 54.94, category: 'transition-metal', period: 4, group: 7, electronConfiguration: '[Ar] 3d⁵ 4s²', phase: 'solid' },
-  { number: 26, symbol: 'Fe', name: 'Iron', atomicMass: 55.85, category: 'transition-metal', period: 4, group: 8, electronConfiguration: '[Ar] 3d⁶ 4s²', phase: 'solid' },
-  { number: 27, symbol: 'Co', name: 'Cobalt', atomicMass: 58.93, category: 'transition-metal', period: 4, group: 9, electronConfiguration: '[Ar] 3d⁷ 4s²', phase: 'solid' },
-  { number: 28, symbol: 'Ni', name: 'Nickel', atomicMass: 58.69, category: 'transition-metal', period: 4, group: 10, electronConfiguration: '[Ar] 3d⁸ 4s²', phase: 'solid' },
-  { number: 29, symbol: 'Cu', name: 'Copper', atomicMass: 63.55, category: 'transition-metal', period: 4, group: 11, electronConfiguration: '[Ar] 3d¹⁰ 4s¹', phase: 'solid' },
-  { number: 30, symbol: 'Zn', name: 'Zinc', atomicMass: 65.38, category: 'transition-metal', period: 4, group: 12, electronConfiguration: '[Ar] 3d¹⁰ 4s²', phase: 'solid' },
-  { number: 31, symbol: 'Ga', name: 'Gallium', atomicMass: 69.72, category: 'post-transition-metal', period: 4, group: 13, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p¹', phase: 'solid' },
-  { number: 32, symbol: 'Ge', name: 'Germanium', atomicMass: 72.63, category: 'metalloid', period: 4, group: 14, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p²', phase: 'solid' },
-  { number: 33, symbol: 'As', name: 'Arsenic', atomicMass: 74.92, category: 'metalloid', period: 4, group: 15, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p³', phase: 'solid' },
-  { number: 34, symbol: 'Se', name: 'Selenium', atomicMass: 78.97, category: 'nonmetal', period: 4, group: 16, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p⁴', phase: 'solid' },
-  { number: 35, symbol: 'Br', name: 'Bromine', atomicMass: 79.90, category: 'halogen', period: 4, group: 17, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p⁵', phase: 'liquid' },
-  { number: 36, symbol: 'Kr', name: 'Krypton', atomicMass: 83.80, category: 'noble-gas', period: 4, group: 18, electronConfiguration: '[Ar] 3d¹⁰ 4s² 4p⁶', phase: 'gas' },
-  // Adding more key elements for demonstration
-  { number: 37, symbol: 'Rb', name: 'Rubidium', atomicMass: 85.47, category: 'alkali-metal', period: 5, group: 1, electronConfiguration: '[Kr] 5s¹', phase: 'solid' },
-  { number: 38, symbol: 'Sr', name: 'Strontium', atomicMass: 87.62, category: 'alkaline-earth-metal', period: 5, group: 2, electronConfiguration: '[Kr] 5s²', phase: 'solid' },
-  { number: 47, symbol: 'Ag', name: 'Silver', atomicMass: 107.87, category: 'transition-metal', period: 5, group: 11, electronConfiguration: '[Kr] 4d¹⁰ 5s¹', phase: 'solid' },
-  { number: 53, symbol: 'I', name: 'Iodine', atomicMass: 126.90, category: 'halogen', period: 5, group: 17, electronConfiguration: '[Kr] 4d¹⁰ 5s² 5p⁵', phase: 'solid' },
-  { number: 54, symbol: 'Xe', name: 'Xenon', atomicMass: 131.29, category: 'noble-gas', period: 5, group: 18, electronConfiguration: '[Kr] 4d¹⁰ 5s² 5p⁶', phase: 'gas' },
-  { number: 79, symbol: 'Au', name: 'Gold', atomicMass: 196.97, category: 'transition-metal', period: 6, group: 11, electronConfiguration: '[Xe] 4f¹⁴ 5d¹⁰ 6s¹', phase: 'solid' },
-  { number: 86, symbol: 'Rn', name: 'Radon', atomicMass: 222.02, category: 'noble-gas', period: 6, group: 18, electronConfiguration: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶', phase: 'gas' },
-  { number: 118, symbol: 'Og', name: 'Oganesson', atomicMass: 294, category: 'noble-gas', period: 7, group: 18, electronConfiguration: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶', phase: 'solid' },
-  // Sample lanthanides
-  { number: 57, symbol: 'La', name: 'Lanthanum', atomicMass: 138.91, category: 'lanthanide', period: 6, group: 3, electronConfiguration: '[Xe] 5d¹ 6s²', phase: 'solid' },
-  { number: 58, symbol: 'Ce', name: 'Cerium', atomicMass: 140.12, category: 'lanthanide', period: 6, group: 3, electronConfiguration: '[Xe] 4f¹ 5d¹ 6s²', phase: 'solid' },
-  // Sample actinides
-  { number: 89, symbol: 'Ac', name: 'Actinium', atomicMass: 227.03, category: 'actinide', period: 7, group: 3, electronConfiguration: '[Rn] 6d¹ 7s²', phase: 'solid' },
-  { number: 92, symbol: 'U', name: 'Uranium', atomicMass: 238.03, category: 'actinide', period: 7, group: 3, electronConfiguration: '[Rn] 5f³ 6d¹ 7s²', phase: 'solid' },
+export const elements: ElementData[] = [
+  {
+    atomicNumber: 1,
+    symbol: "H",
+    name: "Hydrogen",
+    atomicMass: 1.008,
+    category: "nonmetal",
+    electronConfiguration: "1s¹",
+    description: "The lightest and most abundant element in the universe. Hydrogen is a colorless, odorless, tasteless, and highly flammable gas.",
+    uses: "Used in fuel cells, petroleum refining, ammonia production, and as rocket fuel. Essential for life processes.",
+    discoveredBy: "Henry Cavendish",
+    yearDiscovered: "1766",
+    gridPosition: { row: 1, col: 1 }
+  },
+  {
+    atomicNumber: 2,
+    symbol: "He",
+    name: "Helium",
+    atomicMass: 4.003,
+    category: "noble-gas",
+    electronConfiguration: "1s²",
+    description: "A noble gas that is colorless, odorless, tasteless, and completely inert under normal conditions. Second most abundant element in the universe.",
+    uses: "Used in balloons, welding, deep-sea breathing apparatus, and cooling systems for superconducting magnets.",
+    discoveredBy: "Pierre Janssen & Norman Lockyer",
+    yearDiscovered: "1868",
+    gridPosition: { row: 1, col: 18 }
+  },
+  {
+    atomicNumber: 3,
+    symbol: "Li",
+    name: "Lithium",
+    atomicMass: 6.94,
+    category: "alkali-metal",
+    electronConfiguration: "[He] 2s¹",
+    description: "The lightest metal and solid element. Highly reactive and flammable, it's soft enough to cut with a knife.",
+    uses: "Essential for rechargeable batteries, psychiatric medications, ceramics, and glass production.",
+    discoveredBy: "Johan August Arfwedson",
+    yearDiscovered: "1817",
+    gridPosition: { row: 2, col: 1 }
+  },
+  {
+    atomicNumber: 4,
+    symbol: "Be",
+    name: "Beryllium",
+    atomicMass: 9.012,
+    category: "alkaline-earth-metal",
+    electronConfiguration: "[He] 2s²",
+    description: "A lightweight, strong metal with high melting point. Highly toxic and requires careful handling.",
+    uses: "Used in aerospace applications, X-ray windows, nuclear reactors, and electronic components.",
+    discoveredBy: "Louis-Nicolas Vauquelin",
+    yearDiscovered: "1798",
+    gridPosition: { row: 2, col: 2 }
+  },
+  {
+    atomicNumber: 5,
+    symbol: "B",
+    name: "Boron",
+    atomicMass: 10.81,
+    category: "metalloid",
+    electronConfiguration: "[He] 2s² 2p¹",
+    description: "A metalloid that is essential for plant growth. Pure boron is a dark, hard, and brittle crystalline material.",
+    uses: "Used in fiberglass, ceramics, agriculture fertilizers, and as a neutron absorber in nuclear reactors.",
+    discoveredBy: "Joseph Louis Gay-Lussac & Louis Jacques Thénard",
+    yearDiscovered: "1808",
+    gridPosition: { row: 2, col: 13 }
+  },
+  {
+    atomicNumber: 6,
+    symbol: "C",
+    name: "Carbon",
+    atomicMass: 12.01,
+    category: "nonmetal",
+    electronConfiguration: "[He] 2s² 2p²",
+    description: "The basis of all organic chemistry and life on Earth. Can form more compounds than any other element.",
+    uses: "Found in all living things, used in steel production, diamonds, graphite, and countless organic compounds.",
+    discoveredBy: "Known since ancient times",
+    yearDiscovered: "Ancient",
+    gridPosition: { row: 2, col: 14 }
+  },
+  {
+    atomicNumber: 7,
+    symbol: "N",
+    name: "Nitrogen",
+    atomicMass: 14.01,
+    category: "nonmetal",
+    electronConfiguration: "[He] 2s² 2p³",
+    description: "Makes up about 78% of Earth's atmosphere. Essential for amino acids and proteins in all living organisms.",
+    uses: "Used in fertilizers, explosives, food preservation, and creating inert atmospheres for chemical processes.",
+    discoveredBy: "Daniel Rutherford",
+    yearDiscovered: "1772",
+    gridPosition: { row: 2, col: 15 }
+  },
+  {
+    atomicNumber: 8,
+    symbol: "O",
+    name: "Oxygen",
+    atomicMass: 16.00,
+    category: "nonmetal",
+    electronConfiguration: "[He] 2s² 2p⁴",
+    description: "Essential for respiration and combustion. Makes up about 21% of Earth's atmosphere and 89% of water by mass.",
+    uses: "Vital for breathing, used in steel production, medical applications, and rocket propulsion.",
+    discoveredBy: "Carl Wilhelm Scheele & Joseph Priestley",
+    yearDiscovered: "1774",
+    gridPosition: { row: 2, col: 16 }
+  },
+  {
+    atomicNumber: 9,
+    symbol: "F",
+    name: "Fluorine",
+    atomicMass: 19.00,
+    category: "halogen",
+    electronConfiguration: "[He] 2s² 2p⁵",
+    description: "The most electronegative and reactive element. A pale yellow, highly toxic gas that attacks almost all materials.",
+    uses: "Used in toothpaste, non-stick coatings, refrigerants, and uranium enrichment.",
+    discoveredBy: "Henri Moissan",
+    yearDiscovered: "1886",
+    gridPosition: { row: 2, col: 17 }
+  },
+  {
+    atomicNumber: 10,
+    symbol: "Ne",
+    name: "Neon",
+    atomicMass: 20.18,
+    category: "noble-gas",
+    electronConfiguration: "[He] 2s² 2p⁶",
+    description: "A noble gas that glows orange-red when electrically excited. Completely inert under normal conditions.",
+    uses: "Famous for neon signs, also used in high-voltage indicators and lightning arresters.",
+    discoveredBy: "William Ramsay & Morris Travers",
+    yearDiscovered: "1898",
+    gridPosition: { row: 2, col: 18 }
+  },
+  {
+    atomicNumber: 11,
+    symbol: "Na",
+    name: "Sodium",
+    atomicMass: 22.99,
+    category: "alkali-metal",
+    electronConfiguration: "[Ne] 3s¹",
+    description: "A highly reactive metal that burns in air and reacts violently with water. Essential for life processes.",
+    uses: "Used in table salt, soap production, street lighting, and as a coolant in nuclear reactors.",
+    discoveredBy: "Humphry Davy",
+    yearDiscovered: "1807",
+    gridPosition: { row: 3, col: 1 }
+  },
+  {
+    atomicNumber: 12,
+    symbol: "Mg",
+    name: "Magnesium",
+    atomicMass: 24.31,
+    category: "alkaline-earth-metal",
+    electronConfiguration: "[Ne] 3s²",
+    description: "A lightweight, strong metal that burns with a brilliant white light. Essential for chlorophyll and many enzymes.",
+    uses: "Used in lightweight alloys, fireworks, medicine (antacids), and automotive/aerospace industries.",
+    discoveredBy: "Joseph Black",
+    yearDiscovered: "1755",
+    gridPosition: { row: 3, col: 2 }
+  },
+  {
+    atomicNumber: 13,
+    symbol: "Al",
+    name: "Aluminum",
+    atomicMass: 26.98,
+    category: "post-transition-metal",
+    electronConfiguration: "[Ne] 3s² 3p¹",
+    description: "The most abundant metal in Earth's crust. Lightweight, corrosion-resistant, and highly recyclable.",
+    uses: "Used in packaging, transportation, construction, electronics, and kitchen utensils.",
+    discoveredBy: "Hans Christian Ørsted",
+    yearDiscovered: "1825",
+    gridPosition: { row: 3, col: 13 }
+  },
+  {
+    atomicNumber: 14,
+    symbol: "Si",
+    name: "Silicon",
+    atomicMass: 28.09,
+    category: "metalloid",
+    electronConfiguration: "[Ne] 3s² 3p²",
+    description: "The second most abundant element in Earth's crust. Essential for computer chips and modern electronics.",
+    uses: "Used in computer processors, solar panels, glass production, and silicone materials.",
+    discoveredBy: "Jöns Jacob Berzelius",
+    yearDiscovered: "1824",
+    gridPosition: { row: 3, col: 14 }
+  },
+  {
+    atomicNumber: 15,
+    symbol: "P",
+    name: "Phosphorus",
+    atomicMass: 30.97,
+    category: "nonmetal",
+    electronConfiguration: "[Ne] 3s² 3p³",
+    description: "Essential for DNA, RNA, and ATP. White phosphorus glows in the dark and is highly flammable.",
+    uses: "Used in fertilizers, detergents, matches, and is essential for all living cells.",
+    discoveredBy: "Hennig Brand",
+    yearDiscovered: "1669",
+    gridPosition: { row: 3, col: 15 }
+  },
+  {
+    atomicNumber: 16,
+    symbol: "S",
+    name: "Sulfur",
+    atomicMass: 32.07,
+    category: "nonmetal",
+    electronConfiguration: "[Ne] 3s² 3p⁴",
+    description: "Known since ancient times for its distinctive smell. Essential for proteins and many biological processes.",
+    uses: "Used in sulfuric acid production, vulcanizing rubber, fungicides, and gunpowder.",
+    discoveredBy: "Known since ancient times",
+    yearDiscovered: "Ancient",
+    gridPosition: { row: 3, col: 16 }
+  },
+  {
+    atomicNumber: 17,
+    symbol: "Cl",
+    name: "Chlorine",
+    atomicMass: 35.45,
+    category: "halogen",
+    electronConfiguration: "[Ne] 3s² 3p⁵",
+    description: "A yellow-green toxic gas with a sharp odor. Essential for disinfection and many industrial processes.",
+    uses: "Used in water purification, bleaching, PVC production, and various cleaning products.",
+    discoveredBy: "Carl Wilhelm Scheele",
+    yearDiscovered: "1774",
+    gridPosition: { row: 3, col: 17 }
+  },
+  {
+    atomicNumber: 18,
+    symbol: "Ar",
+    name: "Argon",
+    atomicMass: 39.95,
+    category: "noble-gas",
+    electronConfiguration: "[Ne] 3s² 3p⁶",
+    description: "Makes up about 1% of Earth's atmosphere. Completely inert and used to create inert atmospheres.",
+    uses: "Used in welding, light bulbs, wine preservation, and protecting sensitive materials from oxidation.",
+    discoveredBy: "Lord Rayleigh & William Ramsay",
+    yearDiscovered: "1894",
+    gridPosition: { row: 3, col: 18 }
+  },
+  {
+    atomicNumber: 19,
+    symbol: "K",
+    name: "Potassium",
+    atomicMass: 39.10,
+    category: "alkali-metal",
+    electronConfiguration: "[Ar] 4s¹",
+    description: "Essential for nerve function and muscle contraction. Highly reactive metal that must be stored under oil.",
+    uses: "Used in fertilizers, glass production, soap, and is essential for all living organisms.",
+    discoveredBy: "Humphry Davy",
+    yearDiscovered: "1807",
+    gridPosition: { row: 4, col: 1 }
+  },
+  {
+    atomicNumber: 20,
+    symbol: "Ca",
+    name: "Calcium",
+    atomicMass: 40.08,
+    category: "alkaline-earth-metal",
+    electronConfiguration: "[Ar] 4s²",
+    description: "Essential for bones, teeth, and muscle function. The fifth most abundant element in Earth's crust.",
+    uses: "Used in cement, plaster, chalk, limestone, and is vital for bone and tooth formation.",
+    discoveredBy: "Humphry Davy",
+    yearDiscovered: "1808",
+    gridPosition: { row: 4, col: 2 }
+  }
 ];
+
+export const categoryColors = {
+  "alkali-metal": "bg-red-500",
+  "alkaline-earth-metal": "bg-orange-500", 
+  "transition-metal": "bg-yellow-500",
+  "post-transition-metal": "bg-green-500",
+  "metalloid": "bg-blue-500",
+  "nonmetal": "bg-purple-500",
+  "halogen": "bg-pink-500",
+  "noble-gas": "bg-indigo-500",
+  "lanthanide": "bg-teal-500",
+  "actinide": "bg-cyan-500"
+};

@@ -1,7 +1,7 @@
 
-  # Periodic Table UI Design
+  # Element Page UI Design
 
-  This is a code bundle for Periodic Table UI Design. The original project is available at https://www.figma.com/design/moxwL8SD5U1604gLYFrV50/Periodic-Table-UI-Design.
+  This is a code bundle for Element Page UI Design. The original project is available at https://www.figma.com/design/7LuY8mTFhLrdqryCt5BNLo/Element-Page-UI-Design.
 
   ## Running the code
 
