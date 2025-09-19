@@ -7,6 +7,7 @@ import NavBar from './components/layout/NavBar'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import PeriodicTable from './pages/PeriodicTable'
+import Tools from './pages/Tools'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 
@@ -45,6 +46,8 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/periodic-table" element={<PeriodicTable />} />
+          <Route path="/calculator" element={<Tools />} />
+          <Route path="/tools" element={<Tools />} />
           
           {/* Protected routes */}
           <Route path="/dashboard" element={

@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { motion } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import toast from 'react-hot-toast'
-import { Atom, Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Atom, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -69,23 +70,38 @@ const Login = () => {
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-md w-full">
+      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-md w-full"
+        >
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="lg:hidden w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <Atom className="w-8 h-8 text-white" />
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-center mb-8"
+          >
+            <div className="lg:hidden w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
+              <Atom className="w-8 h-8 text-white animate-spin-slow" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
               Welcome back!
             </h2>
             <p className="text-gray-600">
               Sign in to continue your chemistry journey
             </p>
-          </div>
+          </motion.div>
 
           {/* Login Form */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20"
+          >
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-4">
                 {/* Email Input */}
@@ -168,14 +184,26 @@ const Login = () => {
               </div>
 
               {/* Sign In Button */}
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-4 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02]"
-                disabled={isLoading}
-                loading={isLoading}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
               >
-                {isLoading ? 'Signing in...' : 'Sign in to your account'}
-              </Button>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                >
+                  {isLoading ? (
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  ) : (
+                    <>
+                      <span>Sign in to your account</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+              </motion.div>
 
               {/* Divider */}
               <div className="relative my-6">
@@ -197,18 +225,23 @@ const Login = () => {
                 </Link>
               </div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Footer Text */}
-          <div className="mt-8 text-center">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-8 text-center"
+          >
             <p className="text-xs text-gray-500">
               By signing in, you agree to our{' '}
               <a href="#" className="text-blue-600 hover:underline">Terms of Service</a>
               {' '}and{' '}
               <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   )

@@ -5,10 +5,13 @@ import Button from '../components/ui/Button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
 import { elements, elementCategories } from '../data/elements'
-import { Atom, BookOpen, Trophy, Clock, TrendingUp, Users } from 'lucide-react'
+import { Atom, BookOpen, Trophy, Clock, TrendingUp, Users, Calculator } from 'lucide-react'
+import ToolsWindow from '../components/ToolsWindow'
+import { useState } from 'react'
 
 const Dashboard = () => {
   const { user, logout } = useAuth()
+  const [showToolsWindow, setShowToolsWindow] = useState(false)
 
   const handleLogout = async () => {
     try {
@@ -47,6 +50,13 @@ const Dashboard = () => {
                 Explore Table
               </Button>
             </Link>
+            <Button 
+              onClick={() => setShowToolsWindow(true)} 
+              className="bg-white text-blue-600 hover:bg-blue-50 flex items-center gap-2"
+            >
+              <Calculator className="w-4 h-4" />
+              Chemistry Tools
+            </Button>
             <Button onClick={handleLogout} variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
               Logout
             </Button>
@@ -113,19 +123,30 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Periodic Table Placeholder */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Interactive Periodic Table</h2>
-        <div className="bg-gray-100 rounded-lg p-12 text-center">
-          <svg className="w-24 h-24 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">Periodic Table Coming Soon</h3>
-          <p className="text-gray-500">
-            The interactive periodic table will be available here. You'll be able to explore all 118 elements with detailed information.
-          </p>
+      {/* Chemistry Tools Window */}
+      {showToolsWindow ? (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <ToolsWindow onClose={() => setShowToolsWindow(false)} />
         </div>
-      </div>
+      ) : (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Chemistry Tools & Calculators</h2>
+          <div className="bg-gray-100 rounded-lg p-12 text-center">
+            <Calculator className="w-24 h-24 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">Essential Chemistry Tools</h3>
+            <p className="text-gray-500 mb-6">
+              Access powerful calculators, converters, and reference materials to help with your chemistry studies.
+            </p>
+            <Button 
+              onClick={() => setShowToolsWindow(true)}
+              className="bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-2 mx-auto"
+            >
+              <Calculator className="w-4 h-4" />
+              Open Chemistry Tools
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Recent Activity */}
       <div className="bg-white rounded-lg shadow-md p-6 mt-8">
