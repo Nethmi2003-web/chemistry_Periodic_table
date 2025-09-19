@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import PeriodicTable from './pages/PeriodicTable'
 import Tools from './pages/Tools'
+import StudyGuide from './pages/StudyGuide'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 
@@ -48,6 +49,8 @@ function App() {
           <Route path="/periodic-table" element={<PeriodicTable />} />
           <Route path="/calculator" element={<Tools />} />
           <Route path="/tools" element={<Tools />} />
+          <Route path="/study-guide" element={<StudyGuide />} />
+          <Route path="/study" element={<StudyGuide />} />
           
           {/* Protected routes */}
           <Route path="/dashboard" element={
