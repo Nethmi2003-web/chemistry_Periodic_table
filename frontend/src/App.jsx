@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard'
 import PeriodicTable from './pages/PeriodicTable'
 import Tools from './pages/Tools'
 import StudyGuide from './pages/StudyGuide'
+import Quiz from './pages/Quiz'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/tools" element={<Tools />} />
           <Route path="/study-guide" element={<StudyGuide />} />
           <Route path="/study" element={<StudyGuide />} />
+          <Route path="/quiz" element={<Quiz />} />
           
           {/* Protected routes */}
           <Route path="/dashboard" element={
