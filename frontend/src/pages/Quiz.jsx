@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Play, Trophy, RotateCcw, Target, TrendingUp, Clock, CheckCircle, XCircle } from "lucide-react";
+import { ArrowRight, Play, Trophy, RotateCcw, Target, TrendingUp, Clock, CheckCircle, XCircle, Star, Zap, Brain, Award, BookOpen, Sparkles } from "lucide-react";
 
 // Quiz data
 const periodicTableQuiz = [
@@ -126,36 +126,51 @@ function QuizHeader({ currentQuestion, totalQuestions, score, timeRemaining }) {
   };
 
   return (
-    <div className="w-full space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-blue-600" />
-          <span className="font-medium text-lg">Periodic Table Quiz</span>
-        </div>
-        {timeRemaining !== undefined && (
-          <div className="flex items-center gap-2 text-gray-600">
-            <Clock className="w-4 h-4" />
-            <span className={`font-mono ${timeRemaining < 60 ? 'text-red-500' : ''}`}>
-              {formatTime(timeRemaining)}
-            </span>
+    <div className="w-full space-y-6">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-white/20 rounded-lg">
+              <Brain className="w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="font-bold text-xl">Periodic Table Quiz</h1>
+              <p className="text-blue-100 text-sm">Test your chemistry knowledge</p>
+            </div>
           </div>
-        )}
+          {timeRemaining !== undefined && (
+            <div className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-lg">
+              <Clock className="w-5 h-5" />
+              <span className={`font-mono text-lg font-bold ${timeRemaining < 60 ? 'text-red-200' : ''}`}>
+                {formatTime(timeRemaining)}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
       
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600">
-            Question {currentQuestion} of {totalQuestions}
-          </span>
-          <span className="text-sm font-medium">
-            Score: {score}/{totalQuestions}
-          </span>
+      <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
+        <div className="flex justify-between items-center mb-3">
+          <div className="flex items-center gap-2">
+            <Target className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-medium text-gray-700">
+              Question {currentQuestion} of {totalQuestions}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Star className="w-4 h-4 text-yellow-500" />
+            <span className="text-sm font-bold text-gray-800">
+              Score: {score}/{totalQuestions}
+            </span>
+          </div>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
           <div 
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+            className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500 ease-out relative"
             style={{ width: `${progress}%` }}
-          ></div>
+          >
+            <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -165,35 +180,41 @@ function QuizHeader({ currentQuestion, totalQuestions, score, timeRemaining }) {
 // Question Card Component
 function QuestionCard({ question, options, selectedAnswer, showResult, onSelectAnswer }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
-      <div className="space-y-4">
-        <h2 className="text-xl font-medium leading-relaxed text-gray-900">{question}</h2>
+    <div className="bg-white rounded-xl shadow-lg p-8 space-y-8 border border-gray-100">
+      <div className="space-y-6">
+        <div className="flex items-start gap-4">
+          <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md">
+            <BookOpen className="w-6 h-6 text-white" />
+          </div>
+          <h2 className="text-2xl font-semibold leading-relaxed text-gray-900 flex-1">{question}</h2>
+        </div>
         
-        <div className="grid gap-3">
-          {options.map((option) => {
+        <div className="grid gap-4">
+          {options.map((option, index) => {
             const isSelected = selectedAnswer === option.id;
             const isCorrect = option.isCorrect;
             
-            let buttonClass = "w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ";
+            let buttonClass = "w-full p-5 text-left rounded-xl border-2 transition-all duration-300 transform hover:scale-[1.02] ";
             let showIcon = false;
             let iconColor = "";
+            let optionLabel = String.fromCharCode(65 + index); // A, B, C, D
             
             if (showResult) {
               if (isCorrect) {
-                buttonClass += "border-green-500 bg-green-50 text-green-900";
+                buttonClass += "border-green-500 bg-gradient-to-r from-green-50 to-green-100 text-green-900 shadow-green-200 shadow-lg";
                 iconColor = "text-green-600";
                 showIcon = true;
               } else if (isSelected && !isCorrect) {
-                buttonClass += "border-red-500 bg-red-50 text-red-900";
+                buttonClass += "border-red-500 bg-gradient-to-r from-red-50 to-red-100 text-red-900 shadow-red-200 shadow-lg";
                 iconColor = "text-red-600";
                 showIcon = true;
               } else {
                 buttonClass += "border-gray-200 bg-gray-50 text-gray-600";
               }
             } else if (isSelected) {
-              buttonClass += "border-blue-500 bg-blue-50 text-blue-900";
+              buttonClass += "border-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-900 shadow-blue-200 shadow-lg";
             } else {
-              buttonClass += "border-gray-200 bg-white text-gray-900 hover:border-blue-300 hover:bg-blue-50";
+              buttonClass += "border-gray-200 bg-white text-gray-900 hover:border-blue-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-md";
             }
             
             return (
@@ -204,13 +225,30 @@ function QuestionCard({ question, options, selectedAnswer, showResult, onSelectA
                 disabled={showResult}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className="flex-1">{option.text}</span>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                      showResult 
+                        ? isCorrect 
+                          ? 'bg-green-500 text-white' 
+                          : isSelected 
+                            ? 'bg-red-500 text-white' 
+                            : 'bg-gray-300 text-gray-600'
+                        : isSelected 
+                          ? 'bg-blue-500 text-white' 
+                          : 'bg-gray-200 text-gray-600'
+                    }`}>
+                      {optionLabel}
+                    </div>
+                    <span className="flex-1 text-lg">{option.text}</span>
+                  </div>
                   {showResult && showIcon && (
-                    isCorrect ? (
-                      <CheckCircle className={`w-5 h-5 ml-2 ${iconColor}`} />
-                    ) : isSelected ? (
-                      <XCircle className={`w-5 h-5 ml-2 ${iconColor}`} />
-                    ) : null
+                    <div className="ml-4">
+                      {isCorrect ? (
+                        <CheckCircle className={`w-6 h-6 ${iconColor} animate-bounce`} />
+                      ) : isSelected ? (
+                        <XCircle className={`w-6 h-6 ${iconColor} animate-bounce`} />
+                      ) : null}
+                    </div>
                   )}
                 </div>
               </button>
@@ -227,14 +265,44 @@ function QuizResults({ score, totalQuestions, timeSpent, onRestart }) {
   const percentage = Math.round((score / totalQuestions) * 100);
   
   const getGrade = (percent) => {
-    if (percent >= 90) return { grade: 'A+', color: 'text-green-600', message: 'Outstanding!' };
-    if (percent >= 80) return { grade: 'A', color: 'text-green-500', message: 'Excellent!' };
-    if (percent >= 70) return { grade: 'B', color: 'text-blue-500', message: 'Good job!' };
-    if (percent >= 60) return { grade: 'C', color: 'text-yellow-500', message: 'Not bad!' };
-    return { grade: 'D', color: 'text-red-500', message: 'Keep studying!' };
+    if (percent >= 90) return { 
+      grade: 'A+', 
+      color: 'text-green-600', 
+      bgColor: 'from-green-500 to-emerald-600',
+      message: 'Outstanding! You\'re a chemistry genius!',
+      icon: Sparkles
+    };
+    if (percent >= 80) return { 
+      grade: 'A', 
+      color: 'text-green-500', 
+      bgColor: 'from-green-400 to-green-600',
+      message: 'Excellent work! You know your chemistry!',
+      icon: Award
+    };
+    if (percent >= 70) return { 
+      grade: 'B', 
+      color: 'text-blue-500', 
+      bgColor: 'from-blue-400 to-blue-600',
+      message: 'Good job! Keep up the great work!',
+      icon: TrendingUp
+    };
+    if (percent >= 60) return { 
+      grade: 'C', 
+      color: 'text-yellow-500', 
+      bgColor: 'from-yellow-400 to-orange-500',
+      message: 'Not bad! A little more study will help!',
+      icon: Target
+    };
+    return { 
+      grade: 'D', 
+      color: 'text-red-500', 
+      bgColor: 'from-red-400 to-red-600',
+      message: 'Keep studying! You can do better!',
+      icon: BookOpen
+    };
   };
 
-  const { grade, color, message } = getGrade(percentage);
+  const { grade, color, bgColor, message, icon: GradeIcon } = getGrade(percentage);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -243,78 +311,111 @@ function QuizResults({ score, totalQuestions, timeSpent, onRestart }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-8 text-center space-y-6">
-        <div className="space-y-4">
-          <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-            <Trophy className={`w-8 h-8 ${color}`} />
+    <div className="max-w-4xl mx-auto space-y-8">
+      {/* Main Results Card */}
+      <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl p-8 text-center space-y-8 border border-gray-200">
+        <div className="space-y-6">
+          <div className={`mx-auto w-24 h-24 bg-gradient-to-br ${bgColor} rounded-full flex items-center justify-center shadow-lg animate-pulse`}>
+            <Trophy className="w-12 h-12 text-white" />
           </div>
           
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-gray-900">Quiz Complete!</h2>
-            <p className="text-gray-600">{message}</p>
+          <div className="space-y-3">
+            <h2 className="text-4xl font-bold text-gray-900">Quiz Complete!</h2>
+            <div className="flex items-center justify-center gap-2">
+              <GradeIcon className={`w-6 h-6 ${color}`} />
+              <p className="text-xl text-gray-700 font-medium">{message}</p>
+            </div>
           </div>
         </div>
 
+        {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center justify-center gap-2">
-              <Target className="w-5 h-5 text-gray-500" />
-              <span className="text-sm text-gray-500">Score</span>
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Target className="w-6 h-6 text-blue-600" />
+              <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Score</span>
             </div>
             <div className="space-y-1">
-              <div className={`text-3xl font-bold ${color}`}>{score}/{totalQuestions}</div>
-              <div className={`text-lg ${color}`}>{percentage}%</div>
+              <div className={`text-4xl font-bold ${color}`}>{score}/{totalQuestions}</div>
+              <div className={`text-xl font-semibold ${color}`}>{percentage}%</div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-center gap-2">
-              <TrendingUp className="w-5 h-5 text-gray-500" />
-              <span className="text-sm text-gray-500">Grade</span>
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <TrendingUp className="w-6 h-6 text-purple-600" />
+              <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Grade</span>
             </div>
-            <div className={`text-4xl font-bold ${color}`}>{grade}</div>
+            <div className={`text-5xl font-bold ${color} animate-bounce`}>{grade}</div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-center gap-2">
-              <span className="text-sm text-gray-500">Time</span>
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Clock className="w-6 h-6 text-green-600" />
+              <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Time</span>
             </div>
-            <div className="text-2xl font-bold text-gray-600">
+            <div className="text-3xl font-bold text-gray-800">
               {formatTime(timeSpent)}
             </div>
           </div>
         </div>
 
-        <div className="pt-4 border-t">
+        {/* Action Button */}
+        <div className="pt-6 border-t border-gray-200">
           <button 
             onClick={onRestart}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-5 h-5" />
             Try Again
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900">Performance Breakdown</h3>
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <span className="text-gray-600">Correct Answers</span>
-            <span className="font-medium text-green-600">{score}</span>
+      {/* Performance Breakdown */}
+      <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
+            <Zap className="w-6 h-6 text-white" />
           </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-600">Incorrect Answers</span>
-            <span className="font-medium text-red-500">{totalQuestions - score}</span>
+          <h3 className="text-2xl font-bold text-gray-900">Performance Breakdown</h3>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-4 bg-green-50 rounded-xl border border-green-200">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <span className="font-medium text-gray-700">Correct Answers</span>
+              </div>
+              <span className="font-bold text-2xl text-green-600">{score}</span>
+            </div>
+            
+            <div className="flex justify-between items-center p-4 bg-red-50 rounded-xl border border-red-200">
+              <div className="flex items-center gap-3">
+                <XCircle className="w-5 h-5 text-red-600" />
+                <span className="font-medium text-gray-700">Incorrect Answers</span>
+              </div>
+              <span className="font-bold text-2xl text-red-600">{totalQuestions - score}</span>
+            </div>
           </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-600">Accuracy Rate</span>
-            <span className="font-medium">{percentage}%</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-600">Time per Question</span>
-            <span className="font-medium">{formatTime(Math.round(timeSpent / totalQuestions))}</span>
+          
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-4 bg-blue-50 rounded-xl border border-blue-200">
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-gray-700">Accuracy Rate</span>
+              </div>
+              <span className="font-bold text-2xl text-blue-600">{percentage}%</span>
+            </div>
+            
+            <div className="flex justify-between items-center p-4 bg-purple-50 rounded-xl border border-purple-200">
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-purple-600" />
+                <span className="font-medium text-gray-700">Time per Question</span>
+              </div>
+              <span className="font-bold text-2xl text-purple-600">{formatTime(Math.round(timeSpent / totalQuestions))}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -424,41 +525,74 @@ export default function Quiz() {
 
   if (!quizStarted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-white rounded-lg shadow-md p-8 text-center space-y-6">
-          <div className="space-y-4">
-            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-              <Play className="w-8 h-8 text-blue-600" />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+        <div className="max-w-4xl w-full">
+          {/* Hero Section */}
+          <div className="bg-white rounded-2xl shadow-2xl p-8 text-center space-y-8 border border-gray-200">
+            <div className="space-y-6">
+              <div className="mx-auto w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                <Brain className="w-12 h-12 text-white" />
+              </div>
+              <div className="space-y-3">
+                <h1 className="text-4xl font-bold text-gray-900">Periodic Table Quiz</h1>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                  Test your chemistry knowledge with our interactive quiz! Challenge yourself with 
+                  {periodicTableQuiz.length} carefully crafted questions about elements, their properties, 
+                  and chemical symbols.
+                </p>
+              </div>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Periodic Table Quiz</h1>
-            <p className="text-gray-600 max-w-md mx-auto">
-              Test your knowledge of the periodic table! Answer {periodicTableQuiz.length} questions 
-              about elements, their properties, and chemical symbols.
-            </p>
+            
+            {/* Features Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-6 h-6 text-white" />
+                </div>
+                <div className="font-bold text-2xl text-blue-600 mb-2">{periodicTableQuiz.length}</div>
+                <div className="text-sm font-medium text-blue-700">Questions</div>
+                <div className="text-xs text-blue-600 mt-1">Multiple choice format</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+                <div className="font-bold text-2xl text-purple-600 mb-2">10</div>
+                <div className="text-sm font-medium text-purple-700">Minutes</div>
+                <div className="text-xs text-purple-600 mt-1">Time limit</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-6 h-6 text-white" />
+                </div>
+                <div className="font-bold text-2xl text-green-600 mb-2">Instant</div>
+                <div className="text-sm font-medium text-green-700">Feedback</div>
+                <div className="text-xs text-green-600 mt-1">With explanations</div>
+              </div>
+            </div>
+
+            {/* Action Button */}
+            <div className="pt-4">
+              <button 
+                onClick={startQuiz}
+                className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-xl"
+              >
+                <Play className="w-6 h-6" />
+                Start Quiz
+                <Sparkles className="w-5 h-5" />
+              </button>
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
-            <div className="text-center">
-              <div className="font-bold text-xl text-blue-600">{periodicTableQuiz.length}</div>
-              <div className="text-sm text-gray-500">Questions</div>
-            </div>
-            <div className="text-center">
-              <div className="font-bold text-xl text-blue-600">10</div>
-              <div className="text-sm text-gray-500">Minutes</div>
-            </div>
-            <div className="text-center">
-              <div className="font-bold text-xl text-blue-600">Multiple</div>
-              <div className="text-sm text-gray-500">Choice</div>
+          {/* Additional Info */}
+          <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200">
+            <div className="flex items-center justify-center gap-2 text-gray-600">
+              <Zap className="w-5 h-5" />
+              <span className="text-sm font-medium">Ready to test your chemistry knowledge?</span>
             </div>
           </div>
-
-          <button 
-            onClick={startQuiz}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg font-medium"
-          >
-            <Play className="w-5 h-5" />
-            Start Quiz
-          </button>
         </div>
       </div>
     );
@@ -466,7 +600,7 @@ export default function Quiz() {
 
   if (quizState.isCompleted) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 py-8">
         <QuizResults
           score={quizState.score}
           totalQuestions={periodicTableQuiz.length}
@@ -481,8 +615,8 @@ export default function Quiz() {
   const hasAnswer = !!currentAnswer;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 py-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 py-8">
+      <div className="max-w-5xl mx-auto space-y-8">
         <QuizHeader
           currentQuestion={quizState.currentQuestionIndex + 1}
           totalQuestions={periodicTableQuiz.length}
@@ -498,34 +632,53 @@ export default function Quiz() {
           onSelectAnswer={selectAnswer}
         />
 
-        <div className="flex justify-between items-center">
-          <div className="text-sm text-gray-600">
-            {quizState.showResult && currentQuestion.explanation && (
-              <div className="bg-gray-100 p-3 rounded-lg max-w-md">
-                <strong>Explanation: </strong>{currentQuestion.explanation}
+        {/* Explanation and Actions */}
+        <div className="space-y-6">
+          {quizState.showResult && currentQuestion.explanation && (
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="p-2 bg-blue-500 rounded-lg">
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-blue-900 mb-2">Explanation</h4>
+                  <p className="text-blue-800 leading-relaxed">{currentQuestion.explanation}</p>
+                </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
           
-          <div className="flex gap-3">
-            {!quizState.showResult && hasAnswer && (
-              <button 
-                onClick={showQuestionResult}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-              >
-                Show Answer
-              </button>
-            )}
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2 text-gray-600">
+              {!quizState.showResult && hasAnswer && (
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span className="text-sm font-medium">Answer selected</span>
+                </div>
+              )}
+            </div>
             
-            {quizState.showResult && (
-              <button 
-                onClick={nextQuestion}
-                className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-              >
-                {isLastQuestion ? "Finish Quiz" : "Next Question"}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
+            <div className="flex gap-4">
+              {!quizState.showResult && hasAnswer && (
+                <button 
+                  onClick={showQuestionResult}
+                  className="inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-200 font-medium"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Show Answer
+                </button>
+              )}
+              
+              {quizState.showResult && (
+                <button 
+                  onClick={nextQuestion}
+                  className="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold"
+                >
+                  {isLastQuestion ? "Finish Quiz" : "Next Question"}
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
