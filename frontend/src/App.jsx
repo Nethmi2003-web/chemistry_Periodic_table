@@ -10,6 +10,7 @@ import PeriodicTable from './pages/PeriodicTable'
 import Tools from './pages/Tools'
 import StudyGuide from './pages/StudyGuide'
 import Quiz from './pages/Quiz'
+import About from './pages/About'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 
@@ -43,7 +44,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 pt-28">
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
@@ -53,6 +54,7 @@ function App() {
           <Route path="/study-guide" element={<StudyGuide />} />
           <Route path="/study" element={<StudyGuide />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/about" element={<About />} />
           
           {/* Protected routes */}
           <Route path="/dashboard" element={

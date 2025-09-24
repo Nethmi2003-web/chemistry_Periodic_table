@@ -42,59 +42,61 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Banner */}
-      <section className="relative h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 overflow-hidden">
+      <section className="relative min-h-screen w-full bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="absolute inset-0" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3Ccircle cx='53' cy='7' r='7'/%3E%3Ccircle cx='7' cy='53' r='7'/%3E%3Ccircle cx='53' cy='53' r='7'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           opacity: 0.2
         }}></div>
         
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="max-w-6xl mx-auto px-4 text-center text-white">
-      <motion.div
+        <div className="relative z-10 w-full h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full text-center text-white py-12 sm:py-16 lg:py-20">
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
-      >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="mx-auto mb-8 w-24 h-24 text-blue-400"
-        >
-          <Atom className="w-full h-full" />
-        </motion.div>
-        
-              <h1 className="mb-6 text-5xl md:text-7xl font-bold leading-tight">
-                Discover the World of
-                <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Chemistry
-                </span>
-        </h1>
-        
-              <p className="max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-                With a reputation for excellence in chemical education, Chemistry Explorer is all about giving you 
-                an uncomplicated journey through the periodic table and beyond.
-              </p>
+              className="space-y-6 sm:space-y-8 lg:space-y-12"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="mx-auto w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-blue-400"
+              >
+                <Atom className="w-full h-full" />
+              </motion.div>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link to="/periodic-table">
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+                  Discover the World of
+                  <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Chemistry
+                  </span>
+                </h1>
+                
+                <p className="max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed px-4">
+                  With a reputation for excellence in chemical education, Chemistry Explorer is all about giving you 
+                  an uncomplicated journey through the periodic table and beyond.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6">
+                <Link to="/periodic-table" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Explore Elements
-                    <ChevronRight className="ml-2 w-5 h-5" />
+                    <ChevronRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                   </Button>
                 </Link>
                 
-                <Link to="/quiz">
+                <Link to="/quiz" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                    className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Test Your Knowledge
-                    <ChevronRight className="ml-2 w-5 h-5" />
+                    <ChevronRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                   </Button>
                 </Link>
               </div>

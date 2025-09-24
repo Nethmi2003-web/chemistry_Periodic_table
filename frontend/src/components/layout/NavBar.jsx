@@ -12,7 +12,8 @@ import {
   X,
   Star,
   Trophy,
-  BookMarked
+  BookMarked,
+  Users
 } from 'lucide-react'
 
 const NavBar = () => {
@@ -43,7 +44,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 sticky top-0 z-50 w-full overflow-hidden">
+    <nav className="bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 fixed top-0 left-0 right-0 z-50 w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 w-full">
         <div className="flex justify-between items-center h-20 w-full min-w-0">
           {/* Logo */}
@@ -84,35 +85,27 @@ const NavBar = () => {
               </Link>
               
               <Link
-                to="/periodic-table"
-                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
-              >
-                <Atom className="w-4 h-4 mr-1 group-hover:rotate-180 transition-transform duration-300" />
-                Elements
-              </Link>
-              
-              <Link
-                to="/calculator"
-                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
-              >
-                <Calculator className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
-                Tools
-              </Link>
-              
-              <Link
-                to="/study-guide"
-                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
-              >
-                <BookOpen className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
-                Study
-              </Link>
-              
-              <Link
                 to="/quiz"
                 className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
               >
                 <Trophy className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
                 Quiz
+              </Link>
+              
+              <Link
+                to="/periodic-table"
+                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
+              >
+                <Atom className="w-4 h-4 mr-1 group-hover:rotate-180 transition-transform duration-300" />
+                Chemistry Games
+              </Link>
+              
+              <Link
+                to="/about"
+                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-full transition-all duration-200 group"
+              >
+                <Users className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
+                About Us
               </Link>
             </div>
 
@@ -161,24 +154,27 @@ const NavBar = () => {
             {/* Simplified navigation for medium screens */}
             <div className="flex items-center space-x-1">
               <Link
+                to="/quiz"
+                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200"
+                title="Quiz"
+              >
+                <Trophy className="w-4 h-4" />
+              </Link>
+              
+              <Link
                 to="/periodic-table"
                 className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200"
+                title="Chemistry Games"
               >
                 <Atom className="w-4 h-4" />
               </Link>
               
               <Link
-                to="/calculator"
+                to="/about"
                 className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200"
+                title="About Us"
               >
-                <Calculator className="w-4 h-4" />
-              </Link>
-              
-              <Link
-                to="/quiz"
-                className="flex items-center px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all duration-200"
-              >
-                <Trophy className="w-4 h-4" />
+                <Users className="w-4 h-4" />
               </Link>
             </div>
 
@@ -253,48 +249,32 @@ const NavBar = () => {
               </Link>
               
               <Link
-                to="/periodic-table"
-                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Atom className="w-5 h-5 mr-3 group-hover:rotate-180 transition-transform duration-300" />
-                Elements & Periodic Table
-              </Link>
-              
-              <Link
-                to="/calculator"
-                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Calculator className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200" />
-                Lab Tools & Calculations
-              </Link>
-              
-              <Link
-                to="/study-guide"
-                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <BookOpen className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200" />
-                Student Resources
-              </Link>
-              
-              <Link
                 to="/quiz"
                 className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Trophy className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200" />
-                Advanced Chemistry
+                Quiz
+              </Link>
+              
+              <Link
+                to="/periodic-table"
+                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Atom className="w-5 h-5 mr-3 group-hover:rotate-180 transition-transform duration-300" />
+                Chemistry Games
               </Link>
               
               <Link
                 to="/about"
-                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm"
+                className="flex items-center px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-200 hover:shadow-sm group"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                About
+                <Users className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200" />
+                About Us
               </Link>
+              
               
               <Link
                 to="/contact"
