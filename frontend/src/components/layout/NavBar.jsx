@@ -109,7 +109,7 @@ const NavBar = () => {
               </Link>
             </div>
 
-            {/* User Section */}
+            {/* User Section`we have to add the dashboard link to here */}
             {user ? (
               <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
                 <Link
